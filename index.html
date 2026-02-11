@@ -508,6 +508,8 @@
       justify-content: center;
       animation: fadeUp 1s ease forwards 1.3s;
       opacity: 0;
+      position: relative;
+      z-index: 5;
     }
     .btn-yes {
       padding: 1rem 3rem;
@@ -523,9 +525,12 @@
       box-shadow: 0 8px 28px rgba(158,79,79,0.35);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
       touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
+      -webkit-tap-highlight-color: rgba(158,79,79,0.2);
       position: relative;
-      z-index: 1;
+      z-index: 10;
+      pointer-events: auto;
+      user-select: none;
+      -webkit-user-select: none;
     }
     .btn-yes:hover { transform: scale(1.06) translateY(-2px); box-shadow: 0 14px 36px rgba(158,79,79,0.45); }
     .btn-yes:active { transform: scale(0.98); }
@@ -670,7 +675,7 @@
   <h1 class="gate-question">Will you be<br><em>my Valentine?</em></h1>
   <p class="gate-sub">Think carefully… but not too carefully.</p>
   <div class="gate-buttons">
-    <button class="btn-yes" onclick="sayYes()">Yes! 💕</button>
+    <button class="btn-yes" id="btn-yes">Yes! 💕</button>
     <button class="btn-no-placeholder" id="btn-no-placeholder">Nope 🙈</button>
   </div>
 </div>
@@ -990,14 +995,27 @@
     overlay.classList.add('show');
   }
 
-  // Add touch support for Yes button
+  // Add comprehensive touch and click support for Yes button
   (function() {
-    const yesBtn = document.querySelector('.btn-yes');
+    const yesBtn = document.getElementById('btn-yes');
     if (yesBtn) {
+      // Handle both click and touch events
+      yesBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        sayYes();
+      }, false);
+      
+      yesBtn.addEventListener('touchstart', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+      }, false);
+      
       yesBtn.addEventListener('touchend', function(e) {
         e.preventDefault();
+        e.stopPropagation();
         sayYes();
-      });
+      }, false);
     }
   })();
 
