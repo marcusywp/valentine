@@ -1,0 +1,1006 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Three Years of Us 💕</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blush:     #f9ede8;
+      --rose:      #e8b4b0;
+      --deep-rose: #c97b7b;
+      --wine:      #9e4f4f;
+      --cream:     #fdf8f5;
+      --gold:      #c9a96e;
+      --text:      #4a2e2e;
+      --light-text:#9e7070;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--text);
+      font-family: 'Jost', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    /* ── Petal Canvas ── */
+    #petals { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(160deg, #fdf0ee 0%, #fdf8f5 60%, #f5ede8 100%);
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f2cac4 0%, transparent 70%);
+      opacity: 0.5;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f2cac4 0%, transparent 70%);
+      opacity: 0.4;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      color: var(--deep-rose);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.3s;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3rem, 10vw, 7rem);
+      line-height: 1.05;
+      color: var(--text);
+      margin: 0.3em 0;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.6s;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--wine);
+    }
+
+    .heart-wrap {
+      margin: 1.5rem 0;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.9s;
+    }
+    .heart {
+      display: inline-block;
+      font-size: 2.5rem;
+      animation: heartbeat 1.4s ease-in-out infinite;
+      transform-origin: center;
+    }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: var(--light-text);
+      max-width: 480px;
+      line-height: 1.7;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 1.2s;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.4rem;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 1.8s;
+    }
+    .scroll-hint span {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--rose);
+    }
+    .scroll-arrow {
+      width: 1px;
+      height: 40px;
+      background: linear-gradient(to bottom, var(--rose), transparent);
+      animation: scrollPulse 1.6s ease-in-out infinite;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      text-align: center;
+      padding: 3rem 1rem;
+      position: relative;
+      z-index: 1;
+    }
+    .divider-line {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1.2rem;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    .divider-line::before,
+    .divider-line::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--rose), transparent);
+    }
+    .divider-icon {
+      font-size: 1.2rem;
+      color: var(--deep-rose);
+    }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      text-align: center;
+      padding: 1rem 1rem 3rem;
+      position: relative;
+      z-index: 1;
+    }
+    .section-label h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-style: italic;
+      font-size: clamp(1.8rem, 5vw, 3rem);
+      color: var(--text);
+    }
+    .section-label p {
+      margin-top: 0.6rem;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--light-text);
+    }
+
+    /* ── TIMELINE ── */
+    .timeline {
+      position: relative;
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 1.5rem 4rem;
+      z-index: 1;
+    }
+
+    /* Centre spine */
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--rose) 10%, var(--rose) 90%, transparent);
+      transform: translateX(-50%);
+    }
+
+    /* ── ENTRY ── */
+    .entry {
+      display: grid;
+      grid-template-columns: 1fr 60px 1fr;
+      align-items: center;
+      margin-bottom: 5rem;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .entry.visible { opacity: 1; transform: translateY(0); }
+
+    /* Left-side entry */
+    .entry.left .photo-card  { grid-column: 1; grid-row: 1; justify-self: end; }
+    .entry.left .entry-node  { grid-column: 2; grid-row: 1; }
+    .entry.left .entry-text  { grid-column: 3; grid-row: 1; padding-left: 2rem; }
+
+    /* Right-side entry */
+    .entry.right .entry-text { grid-column: 1; grid-row: 1; text-align: right; padding-right: 2rem; justify-self: end; }
+    .entry.right .entry-node { grid-column: 2; grid-row: 1; }
+    .entry.right .photo-card { grid-column: 3; grid-row: 1; }
+
+    /* Node dot */
+    .entry-node {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+    .node-dot {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 2px solid var(--deep-rose);
+      box-shadow: 0 0 0 4px rgba(201,123,123,0.15);
+    }
+
+    /* Photo card */
+    .photo-card {
+      position: relative;
+      width: 100%;
+      max-width: 340px;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(158,79,79,0.12), 0 2px 8px rgba(158,79,79,0.08);
+      transition: transform 0.4s ease, box-shadow 0.4s ease;
+    }
+    .photo-card:hover {
+      transform: scale(1.02) rotate(0.5deg);
+      box-shadow: 0 20px 60px rgba(158,79,79,0.18);
+    }
+    .photo-card img {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      filter: saturate(0.9) brightness(1.02);
+      transition: filter 0.4s ease;
+    }
+    .photo-card:hover img { filter: saturate(1.1) brightness(1.05); }
+
+    .photo-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(158,79,79,0.35) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* Entry text */
+    .entry-text { max-width: 260px; }
+    .entry-date {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--deep-rose);
+      margin-bottom: 0.5rem;
+    }
+    .entry-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 0.6rem;
+    }
+    .entry-caption {
+      font-size: 0.88rem;
+      line-height: 1.75;
+      color: var(--light-text);
+    }
+
+    /* ── LOVE NOTE ── */
+    .love-note {
+      max-width: 620px;
+      margin: 2rem auto 5rem;
+      padding: 3rem 3.5rem;
+      background: linear-gradient(135deg, #fdf0ee, #fdf8f5);
+      border: 1px solid rgba(201,123,123,0.2);
+      border-radius: 4px;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .love-note.visible { opacity: 1; transform: translateY(0); }
+
+    .love-note::before {
+      content: '"';
+      position: absolute;
+      top: -0.3em; left: 0.4em;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 8rem;
+      color: var(--rose);
+      opacity: 0.25;
+      line-height: 1;
+    }
+
+    .love-note p {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      line-height: 1.8;
+      color: var(--text);
+    }
+    .love-note cite {
+      display: block;
+      margin-top: 1rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--deep-rose);
+      font-style: normal;
+    }
+
+    /* ── CLOSING ── */
+    .closing {
+      position: relative;
+      text-align: center;
+      padding: 6rem 2rem 8rem;
+      background: linear-gradient(160deg, #fdf0ee 0%, #fdf8f5 100%);
+      overflow: hidden;
+      z-index: 1;
+    }
+    .closing::before {
+      content: '';
+      position: absolute;
+      top: -150px; left: 50%;
+      transform: translateX(-50%);
+      width: 600px; height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(232,180,176,0.35) 0%, transparent 70%);
+    }
+
+    .closing-photo {
+      width: min(420px, 90%);
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border-radius: 4px;
+      margin: 0 auto 3rem;
+      display: block;
+      box-shadow: 0 20px 60px rgba(158,79,79,0.2);
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 1s ease, transform 1s ease;
+    }
+    .closing-photo.visible { opacity: 1; transform: scale(1); }
+
+    .closing-msg {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+    }
+    .closing-msg.visible { opacity: 1; transform: translateY(0); }
+
+    .closing-msg h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 6vw, 4.5rem);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .closing-msg h3 em { font-style: italic; color: var(--wine); }
+
+    .closing-msg p {
+      font-size: clamp(0.9rem, 2vw, 1.05rem);
+      color: var(--light-text);
+      max-width: 480px;
+      margin: 0 auto 2rem;
+      line-height: 1.8;
+    }
+
+    .vday-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+      padding: 0.75rem 2rem;
+      border: 1px solid var(--rose);
+      border-radius: 100px;
+      font-size: 0.8rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--wine);
+      animation: gentle-glow 2.5s ease-in-out infinite;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      color: var(--rose);
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── VALENTINE GATE ── */
+    #vday-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      background: linear-gradient(160deg, #fdf0ee 0%, #fdf8f5 60%, #f5ede8 100%);
+      transition: opacity 0.9s ease, transform 0.9s ease;
+    }
+    #vday-gate.hide {
+      opacity: 0;
+      transform: scale(1.04);
+      pointer-events: none;
+    }
+    #vday-gate::before {
+      content: '';
+      position: absolute;
+      top: -120px; right: -120px;
+      width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f2cac4 0%, transparent 70%);
+      opacity: 0.5;
+    }
+    #vday-gate::after {
+      content: '';
+      position: absolute;
+      bottom: -80px; left: -80px;
+      width: 400px; height: 400px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #f2cac4 0%, transparent 70%);
+      opacity: 0.4;
+    }
+    .gate-eyebrow {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: var(--deep-rose);
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      margin-bottom: 1.2rem;
+      animation: fadeUp 1s ease forwards 0.3s;
+      opacity: 0;
+    }
+    .gate-heart {
+      font-size: 4rem;
+      display: block;
+      animation: heartbeat 1.4s ease-in-out infinite, fadeUp 1s ease forwards 0.5s;
+      opacity: 0;
+      margin-bottom: 1.5rem;
+    }
+    .gate-question {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2.6rem, 9vw, 6.5rem);
+      line-height: 1.1;
+      color: var(--text);
+      margin-bottom: 0.4em;
+      animation: fadeUp 1s ease forwards 0.7s;
+      opacity: 0;
+    }
+    .gate-question em { font-style: italic; color: var(--wine); }
+    .gate-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      color: var(--light-text);
+      margin-bottom: 3rem;
+      animation: fadeUp 1s ease forwards 1s;
+      opacity: 0;
+    }
+    .gate-buttons {
+      display: flex;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 1s ease forwards 1.3s;
+      opacity: 0;
+    }
+    .btn-yes {
+      padding: 1rem 3rem;
+      background: linear-gradient(135deg, var(--deep-rose), var(--wine));
+      color: #fff;
+      border: none;
+      border-radius: 100px;
+      font-family: 'Jost', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 8px 28px rgba(158,79,79,0.35);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .btn-yes:hover { transform: scale(1.06) translateY(-2px); box-shadow: 0 14px 36px rgba(158,79,79,0.45); }
+    .btn-yes:active { transform: scale(0.98); }
+    .btn-no {
+      position: fixed;
+      z-index: 99999;
+      padding: 1rem 2.2rem;
+      background: transparent;
+      color: var(--deep-rose);
+      border: 1px solid var(--rose);
+      border-radius: 100px;
+      font-family: 'Jost', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      visibility: hidden;
+    }
+    .btn-no-placeholder {
+      padding: 1rem 2.2rem;
+      background: transparent;
+      color: var(--deep-rose);
+      border: 1px solid var(--rose);
+      border-radius: 100px;
+      font-family: 'Jost', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: default;
+      pointer-events: none;
+      opacity: 1;
+    }
+    /* Yes celebration overlay */
+    #yes-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(160deg, #fdf0ee, #fdf8f5);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      text-align: center;
+      padding: 2rem;
+    }
+    #yes-overlay.show { opacity: 1; pointer-events: all; }
+    .yes-big-heart { font-size: 6rem; animation: heartbeat 1s ease-in-out infinite; margin-bottom: 1.5rem; }
+    .yes-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.5rem, 8vw, 6rem);
+      font-weight: 300;
+      color: var(--wine);
+      font-style: italic;
+      margin-bottom: 1rem;
+    }
+    .yes-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1rem, 2.5vw, 1.4rem);
+      color: var(--light-text);
+      max-width: 420px;
+      line-height: 1.7;
+      margin-bottom: 2.5rem;
+    }
+    .yes-cta {
+      padding: 0.9rem 2.5rem;
+      background: linear-gradient(135deg, var(--deep-rose), var(--wine));
+      color: #fff;
+      border: none;
+      border-radius: 100px;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      box-shadow: 0 8px 28px rgba(158,79,79,0.35);
+      transition: transform 0.2s ease;
+    }
+    .yes-cta:hover { transform: scale(1.05); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      14%       { transform: scale(1.18); }
+      28%       { transform: scale(1); }
+      42%       { transform: scale(1.12); }
+      56%       { transform: scale(1); }
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(0.8); }
+      50%       { opacity: 1;   transform: scaleY(1.1); }
+    }
+    @keyframes gentle-glow {
+      0%, 100% { box-shadow: 0 0 0 rgba(201,123,123,0); }
+      50%       { box-shadow: 0 0 18px rgba(201,123,123,0.3); }
+    }
+    @keyframes petalFall {
+      0%   { transform: translateY(-60px) rotate(0deg) translateX(0);   opacity: 0; }
+      10%  { opacity: 0.8; }
+      90%  { opacity: 0.6; }
+      100% { transform: translateY(110vh) rotate(720deg) translateX(80px); opacity: 0; }
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 640px) {
+      .timeline::before { left: 24px; }
+
+      .entry {
+        grid-template-columns: 48px 1fr;
+        grid-template-rows: auto auto;
+        margin-bottom: 3.5rem;
+      }
+      .entry.left .photo-card,
+      .entry.right .photo-card  { grid-column: 2; grid-row: 1; justify-self: start; max-width: 100%; }
+      .entry.left .entry-node,
+      .entry.right .entry-node  { grid-column: 1; grid-row: 1; align-self: start; padding-top: 0.5rem; }
+      .entry.left .entry-text,
+      .entry.right .entry-text  { grid-column: 2; grid-row: 2; padding: 1rem 0 0; text-align: left; padding-right: 0; max-width: 100%; }
+
+      .love-note { padding: 2rem 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="petals"></canvas>
+
+<!-- No button lives at body level so nothing can clip or hide it -->
+<button class="btn-no" id="btn-no">Nope 🙈</button>
+
+<!-- ══ VALENTINE GATE ══ -->
+<div id="vday-gate">
+  <p class="gate-eyebrow">a question, before we begin</p>
+  <span class="gate-heart">💗</span>
+  <h1 class="gate-question">Will you be<br><em>my Valentine?</em></h1>
+  <p class="gate-sub">Think carefully… but not too carefully.</p>
+  <div class="gate-buttons">
+    <button class="btn-yes" onclick="sayYes()">Yes! 💕</button>
+    <button class="btn-no-placeholder" id="btn-no-placeholder">Nope 🙈</button>
+  </div>
+</div>
+
+<!-- ══ YES CELEBRATION ══ -->
+<div id="yes-overlay">
+  <div class="yes-big-heart">💖</div>
+  <h2 class="yes-title">She said yes!</h2>
+  <p class="yes-sub">I knew you would. Now let me take you through three beautiful years of us…</p>
+  <button class="yes-cta" onclick="enterStory()">Take me there ✨</button>
+</div>
+
+<!-- ══ HERO ══ -->
+<section class="hero">
+  <p class="hero-eyebrow">A love story — 3 years in the making</p>
+  <h1 class="hero-title">Three Years<br><em>of Us</em></h1>
+  <div class="heart-wrap"><span class="heart">🌸</span></div>
+  <p class="hero-sub">Every moment, every laugh, every quiet evening — this page is for you, always.</p>
+  <div class="scroll-hint">
+    <span>Our story</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ══ SECTION LABEL ══ -->
+<div class="section-label">
+  <h2>The moments that made us</h2>
+  <p>Scroll through our story</p>
+</div>
+
+<!-- ══ TIMELINE ══ -->
+<div class="timeline">
+
+  <!-- Entry 1 -->
+  <div class="entry left">
+    <div class="photo-card">
+      <img src="photo1.jpg" alt="Memory 1"/>
+      <div class="photo-overlay"></div>
+    </div>
+    <div class="entry-node"><div class="node-dot"></div></div>
+    <div class="entry-text">
+      <span class="entry-date">📅 Early · 2023</span>
+      <h3 class="entry-title">The Girl Who Changed My World</h3>
+      <p class="entry-caption">On a random day that became unforgettable, the most beautiful chapter of my life quietly began. She didn’t know it yet… but she was about to become my everything.</p>
+    </div>
+  </div>
+
+  <!-- Entry 2 -->
+  <div class="entry right">
+    <div class="entry-text">
+      <span class="entry-date">📅 Early · 2023</span>
+      <h3 class="entry-title">Just a Guy…</h3>
+      <p class="entry-caption">Just a normal guy with normal dreams — until I met someone who made everything feel extraordinary.</p>
+    </div>
+    <div class="entry-node"><div class="node-dot"></div></div>
+    <div class="photo-card">
+      <img src="photo2.jpg" alt="Memory 2"/>
+      <div class="photo-overlay"></div>
+    </div>
+  </div>
+
+  <!-- Entry 3 -->
+  <div class="entry left">
+    <div class="photo-card">
+      <img src="photo3.jpg" alt="Memory 3"/>
+      <div class="photo-overlay"></div>
+    </div>
+    <div class="entry-node"><div class="node-dot"></div></div>
+    <div class="entry-text">
+      <span class="entry-date">📅 Early · 2024</span>
+      <h3 class="entry-title">Masterpieces in Progress</h3>
+      <p class="entry-caption">Two artists. Zero experience. One unforgettable day. It might not belong in a museum… but it belongs in my heart.</p>
+    </div>
+  </div>
+
+  <!-- Love Note break -->
+  <div class="love-note">
+    <p>In you, I found someone who makes ordinary days feel like the greatest gift. Every moment with you is one I'd choose a thousand times over.</p>
+    <cite>— with all my heart</cite>
+  </div>
+
+  <!-- Entry 4 -->
+  <div class="entry right">
+    <div class="entry-text">
+      <span class="entry-date">📅 Birthday · 2024</span>
+      <h3 class="entry-title">A Seat Next to You</h3>
+      <p class="entry-caption">The dinner was lovely, the food was great — but my favorite part was having a seat next to you all night.</p>
+    </div>
+    <div class="entry-node"><div class="node-dot"></div></div>
+    <div class="photo-card">
+      <img src="photo4.jpg" alt="Memory 4"/>
+      <div class="photo-overlay"></div>
+    </div>
+  </div>
+
+  <!-- Entry 5 -->
+  <div class="entry left">
+    <div class="photo-card">
+      <img src="photo5.jpg" alt="Memory 5"/>
+      <div class="photo-overlay"></div>
+    </div>
+    <div class="entry-node"><div class="node-dot"></div></div>
+    <div class="entry-text">
+      <span class="entry-date">📅 Fine Dining · 2025</span>
+      <h3 class="entry-title">Let Me Treat You</h3>
+      <p class="entry-caption">You’ve given me so many beautiful moments. That night, I just wanted to give one back. Watching you smile across the table was worth every second.</p>
+    </div>
+  </div>
+
+  <!-- Entry 6 -->
+  <div class="entry right">
+    <div class="entry-text">
+      <span class="entry-date">📅 Birthday · 2025</span>
+      <h3 class="entry-title">One-Upped</h3>
+      <p class="entry-caption">Just when I thought I did well… you showed up and did it better. Fancier place. Better view. Same two people — still laughing at everything.</p>
+    </div>
+    <div class="entry-node"><div class="node-dot"></div></div>
+    <div class="photo-card">
+      <img src="photo6.jpg" alt="Memory 6"/>
+      <div class="photo-overlay"></div>
+    </div>
+  </div>
+
+  <!-- Entry 7 -->
+  <div class="entry left">
+    <div class="photo-card">
+      <img src="photo8.jpg" alt="Memory 7"/>
+      <div class="photo-overlay"></div>
+    </div>
+    <div class="entry-node"><div class="node-dot"></div></div>
+    <div class="entry-text">
+      <span class="entry-date">📅 Oversea · 2025</span>
+      <h3 class="entry-title">Chongqing, With You</h3>
+      <p class="entry-caption">New country. New streets. Same two people figuring it out together. Chongqing was beautiful — but sharing it with you made it unforgettable.</p>
+    </div>
+  </div>
+
+  <!-- Entry 8 -->
+  <div class="entry right">
+    <div class="entry-text">
+      <span class="entry-date">📅 2025</span>
+      <h3 class="entry-title">Travel Partner Secured</h3>
+      <p class="entry-caption">We survived airport stress, figured out directions, and still managed to take cute photos. I’d say we make a pretty solid team.</p>
+    </div>
+    <div class="entry-node"><div class="node-dot"></div></div>
+    <div class="photo-card">
+      <img src="photo9.jpeg" alt="Memory 8"/>
+      <div class="photo-overlay"></div>
+    </div>
+  </div>
+
+  <!-- Entry 9 -->
+  <div class="entry left">
+    <div class="photo-card">
+      <img src="photo10.jpeg" alt="Memory 9"/>
+      <div class="photo-overlay"></div>
+    </div>
+    <div class="entry-node"><div class="node-dot"></div></div>
+    <div class="entry-text">
+      <span class="entry-date">📅 2025</span>
+      <h3 class="entry-title">Chongqing Looks Good on Us</h3>
+      <p class="entry-caption">The city lights were beautiful, but my favorite view was still the one standing next to me.</p>
+    </div>
+  </div>
+
+</div><!-- /timeline -->
+
+<!-- ══ DIVIDER ══ -->
+<div class="divider">
+  <div class="divider-line"><span class="divider-icon">✦</span></div>
+</div>
+
+<!-- ══ CLOSING ══ -->
+<section class="closing">
+  <img class="closing-photo"
+       src="photo-closing.jpg"
+       alt="Our favourite photo"/>
+  <div class="closing-msg">
+    <h3>Happy<br><em>Valentine's Day</em></h3>
+    <p>Thank you for every hug, every laugh, every quiet moment. I fall in love with you a little more every day — and I'd choose you in every lifetime.</p>
+    <div class="vday-badge">
+      <span class="heart" style="font-size:1rem;">💕</span>
+      <span>Forever yours</span>
+    </div>
+  </div>
+</section>
+
+<footer>Made with love, just for you &nbsp;♡</footer>
+
+<script>
+  /* ── Falling Petals ── */
+  (function() {
+    const canvas = document.getElementById('petals');
+    const ctx    = canvas.getContext('2d');
+    let   W, H;
+    const petals = [];
+    const PETAL_COUNT = 22;
+    const COLORS = ['#f2cac4','#e8b4b0','#f9ede8','#e8b4b0','#c97b7b'];
+
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+    }
+    resize();
+    window.addEventListener('resize', resize);
+
+    function randomPetal() {
+      return {
+        x:     Math.random() * W,
+        y:     Math.random() * -H,
+        r:     4 + Math.random() * 7,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        speed: 0.6 + Math.random() * 1.2,
+        drift: (Math.random() - 0.5) * 0.8,
+        spin:  (Math.random() - 0.5) * 0.04,
+        angle: Math.random() * Math.PI * 2,
+        sway:  0.3 + Math.random() * 0.5,
+        swayT: Math.random() * 100,
+      };
+    }
+
+    for (let i = 0; i < PETAL_COUNT; i++) {
+      const p = randomPetal();
+      p.y = Math.random() * H; // start spread on screen
+      petals.push(p);
+    }
+
+    function drawPetal(p) {
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.angle);
+      ctx.beginPath();
+      ctx.ellipse(0, 0, p.r, p.r * 1.6, 0, 0, Math.PI * 2);
+      ctx.fillStyle = p.color;
+      ctx.globalAlpha = 0.55;
+      ctx.fill();
+      ctx.restore();
+    }
+
+    function tick() {
+      ctx.clearRect(0, 0, W, H);
+      for (const p of petals) {
+        p.swayT += 0.015;
+        p.x     += p.drift + Math.sin(p.swayT) * p.sway;
+        p.y     += p.speed;
+        p.angle += p.spin;
+        if (p.y > H + 20) {
+          Object.assign(p, randomPetal());
+        }
+        drawPetal(p);
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+  })();
+
+  /* ── Scroll Reveal ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll(
+    '.entry, .love-note, .closing-photo, .closing-msg'
+  ).forEach(el => observer.observe(el));
+
+  /* ── Valentine Gate Logic ── */
+  (function() {
+    const btn         = document.getElementById('btn-no');
+    const placeholder = document.getElementById('btn-no-placeholder');
+    let count = 0;
+
+    // On load: position the real btn exactly over the placeholder so it looks inline
+    function positionOverPlaceholder() {
+      var r = placeholder.getBoundingClientRect();
+      btn.style.left       = r.left   + 'px';
+      btn.style.top        = r.top    + 'px';
+      btn.style.width      = r.width  + 'px';
+      btn.style.height     = r.height + 'px';
+      btn.style.visibility = 'visible';
+    }
+
+    // Wait for full render then position
+    window.addEventListener('load', positionOverPlaceholder);
+
+    btn.addEventListener('mouseenter', function() {
+      count++;
+      // Hide placeholder once button has moved away
+      placeholder.style.visibility = 'hidden';
+
+      var bw  = btn.offsetWidth  || 130;
+      var bh  = btn.offsetHeight || 48;
+      var gap = 60;
+      var x   = gap + Math.random() * (window.innerWidth  - bw - gap * 2);
+      var y   = gap + Math.random() * (window.innerHeight - bh - gap * 2);
+      btn.style.left = x + 'px';
+      btn.style.top  = y + 'px';
+
+      if (count >= 10) {
+        btn.style.visibility   = 'hidden';
+        btn.style.pointerEvents = 'none';
+      }
+    });
+
+    btn.addEventListener('touchstart', function(e) {
+      e.preventDefault();
+      btn.dispatchEvent(new Event('mouseenter'));
+    });
+  })();
+
+  function sayYes() {
+    const overlay = document.getElementById('yes-overlay');
+    overlay.classList.add('show');
+  }
+
+  function enterStory() {
+    const gate    = document.getElementById('vday-gate');
+    const overlay = document.getElementById('yes-overlay');
+    overlay.style.transition = 'opacity 0.5s ease';
+    overlay.style.opacity = '0';
+    setTimeout(() => { overlay.style.display = 'none'; }, 500);
+    gate.classList.add('hide');
+    setTimeout(() => {
+      gate.style.display = 'none';
+      document.body.style.overflow = '';
+    }, 1000);
+  }
+
+  // Lock scroll while gate is showing
+  document.body.style.overflow = 'hidden';
+</script>
+</body>
+</html>
