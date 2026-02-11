@@ -522,6 +522,10 @@
       cursor: pointer;
       box-shadow: 0 8px 28px rgba(158,79,79,0.35);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      position: relative;
+      z-index: 1;
     }
     .btn-yes:hover { transform: scale(1.06) translateY(-2px); box-shadow: 0 14px 36px rgba(158,79,79,0.45); }
     .btn-yes:active { transform: scale(0.98); }
@@ -985,6 +989,17 @@
     const overlay = document.getElementById('yes-overlay');
     overlay.classList.add('show');
   }
+
+  // Add touch support for Yes button
+  (function() {
+    const yesBtn = document.querySelector('.btn-yes');
+    if (yesBtn) {
+      yesBtn.addEventListener('touchend', function(e) {
+        e.preventDefault();
+        sayYes();
+      });
+    }
+  })();
 
   function enterStory() {
     const gate    = document.getElementById('vday-gate');
